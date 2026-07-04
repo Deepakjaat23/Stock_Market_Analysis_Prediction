@@ -1,0 +1,10 @@
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+yfinance
+matplotlib
+seaborn
+mplfinance
+scipy
