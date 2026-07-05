@@ -98,37 +98,6 @@ python main.py
 
 ---
 
-## 📷 Screenshots
-
-You can add screenshots of:
-
-* Main Menu
-* Stock Analysis
-* Price Trend Graph
-* Prediction Output
-* Technical Indicators
-
-Create a folder named **screenshots** and upload your images.
-
-Example:
-
-```
-screenshots/
-    menu.png
-    analysis.png
-    prediction.png
-```
-
-Then display them like this:
-
-```markdown
-![Main Menu](screenshots/menu.png)
-
-![Prediction](screenshots/prediction.png)
-```
-
----
-
 ## 📌 Future Improvements
 
 * Deep Learning (LSTM Model)
