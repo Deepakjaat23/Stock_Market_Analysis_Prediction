@@ -1,0 +1,11 @@
+==================================================
+RECOMMENDATION REPORT - AAPL
+==================================================
+Final Call   : HOLD
+Final Score  : 0.0906
+Weights Used : {'ml': 0.0, 'technical': 0.5833333333333334, 'sentiment': 0.4166666666666667}
+
+ML Signal        : {'score': 0.0, 'details': None}
+Technical Signal  : {'score': np.float64(0.1652), 'details': {'RSI': 61.87, 'MACD': 4.625, 'Signal_Line': 1.908, 'BB_Position_%': 87.3, 'Above_MA20': True, 'Above_MA50': True}}
+Sentiment Signal  : {'score': np.float64(-0.014), 'details': {'average_score': np.float64(-0.014), 'label': 'Neutral', 'positive_count': 9, 'negative_count': 8, 'neutral_count': 13, 'total': 30}}
+==================================================

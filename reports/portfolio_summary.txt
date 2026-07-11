@@ -1,0 +1,11 @@
+==================================================
+PORTFOLIO ANALYSIS REPORT
+==================================================
+Holdings           : AAPL, MSFT, TSLA
+Weights            : {'AAPL': np.float64(0.3333), 'MSFT': np.float64(0.3333), 'TSLA': np.float64(0.3333)}
+Annual Return      : 15.35%
+Annual Volatility  : 31.8%
+Sharpe Ratio       : 0.326
+Max Drawdown       : -47.8%
+Total Return       : 60.47%
+==================================================

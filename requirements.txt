@@ -8,3 +8,16 @@ matplotlib
 seaborn
 mplfinance
 scipy
+
+# Deep Learning (LSTM + Prophet)
+tensorflow-cpu
+prophet
+
+# Sentiment Analysis (free news scraping + VADER)
+feedparser
+vaderSentiment
+beautifulsoup4
+
+# Streamlit Web Dashboard
+streamlit
+plotly

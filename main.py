@@ -18,6 +18,16 @@ from src.visualization import visualization_menu
 
 from src.prediction import prediction_menu
 
+from src.deep_learning import deep_learning_menu
+
+from src.portfolio import portfolio_menu
+
+from src.sentiment import sentiment_menu
+
+from src.comparison import comparison_menu
+
+from src.recommendation import recommendation_menu
+
 
 def display_menu():
 
@@ -33,11 +43,24 @@ def display_menu():
 
     print("4. Visualization")
 
-    print("5. Prediction")
+    print("5. Prediction (ML Regression Models)")
 
-    print("6. About Project")
+    print("6. Deep Learning Forecast (LSTM / Prophet)")
+
+    print("7. Portfolio Analysis")
+
+    print("8. News Sentiment Analysis")
+
+    print("9. Multi-Stock Comparison")
+
+    print("10. Buy/Sell Recommendation")
+
+    print("11. About Project")
 
     print("0. Exit")
+
+    print("\nTip: run 'streamlit run streamlit_app.py' for the full")
+    print("     interactive web dashboard with live data and charts.")
 
 
 def about():
@@ -65,6 +88,18 @@ def about():
     print("✔ Technical Analysis")
 
     print("✔ Machine Learning Prediction")
+
+    print("✔ Deep Learning Forecasting (LSTM & Prophet)")
+
+    print("✔ Portfolio Analysis (Risk, Sharpe, Efficient Frontier)")
+
+    print("✔ News Sentiment Analysis")
+
+    print("✔ Multi-Stock Comparison")
+
+    print("✔ Buy/Sell Recommendation Engine")
+
+    print("✔ Streamlit Real-Time Web Dashboard")
 
 
 def main():
@@ -104,6 +139,26 @@ def main():
             prediction_menu()
 
         elif choice == "6":
+
+            deep_learning_menu()
+
+        elif choice == "7":
+
+            portfolio_menu()
+
+        elif choice == "8":
+
+            sentiment_menu()
+
+        elif choice == "9":
+
+            comparison_menu()
+
+        elif choice == "10":
+
+            recommendation_menu()
+
+        elif choice == "11":
 
             about()
 

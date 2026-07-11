@@ -1,0 +1,10 @@
+==================================================
+NEWS SENTIMENT REPORT - AAPL
+==================================================
+Overall Sentiment : Neutral
+Average Score     : -0.014
+Bullish Headlines : 9
+Bearish Headlines : 8
+Neutral Headlines : 13
+Total Headlines   : 30
+==================================================

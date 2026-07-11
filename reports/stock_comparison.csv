@@ -1,0 +1,4 @@
+Company,Current_Price,Total_Return_%,Annual_Return_%,Annual_Volatility_%,Sharpe_Ratio,Max_Drawdown_%,Latest_RSI
+AAPL,315.32,95.12,18.57,28.3,0.656,-33.36,61.87
+MSFT,385.1,20.93,7.96,27.62,0.288,-37.04,52.87
+TSLA,407.76,6.86,19.54,60.32,0.324,-72.97,51.99
