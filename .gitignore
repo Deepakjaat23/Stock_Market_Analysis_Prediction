@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated data - re-created by the pipeline, no need to version
+data/raw/*
+data/processed/*
+models/*
+reports/*
+graphs/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!reports/.gitkeep
+!graphs/.gitkeep
+
+.streamlit/secrets.toml
+venv/
+.env

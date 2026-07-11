@@ -1,0 +1,25 @@
+# Lightweight variant for memory-constrained hosts (e.g. Streamlit Community
+# Cloud free tier, ~1GB RAM). Skips tensorflow-cpu and prophet, so the
+# Deep Learning Forecast page/menu won't work, but everything else will:
+# Technical Analysis, Portfolio Analysis, News Sentiment, Comparison,
+# ML Prediction (classic models), and Buy/Sell Recommendation.
+#
+# Use with: pip install -r requirements-cloud.txt
+
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+yfinance
+matplotlib
+seaborn
+mplfinance
+scipy
+
+feedparser
+vaderSentiment
+beautifulsoup4
+
+streamlit
+plotly

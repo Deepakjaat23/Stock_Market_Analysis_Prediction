@@ -544,6 +544,39 @@ elif page == "🧠 Deep Learning Forecast":
 
     else:
 
+        tf_available = True
+
+        try:
+
+            import tensorflow  # noqa: F401
+
+        except ImportError:
+
+            tf_available = False
+
+        prophet_available = True
+
+        try:
+
+            import prophet  # noqa: F401
+
+        except ImportError:
+
+            prophet_available = False
+
+        if not tf_available or not prophet_available:
+
+            missing = ", ".join(
+                name for name, ok in [("tensorflow", tf_available), ("prophet", prophet_available)] if not ok
+            )
+
+            st.warning(
+                f"This deployment is running the lightweight requirements file, so "
+                f"**{missing}** isn't installed. The corresponding model(s) below are "
+                f"disabled here. Install the full `requirements.txt` (with "
+                f"`tensorflow-cpu` and `prophet`) to enable them."
+            )
+
         selected = st.selectbox("Select a company", companies)
 
         model_choice = st.radio("Model", ["LSTM", "Prophet"], horizontal=True)
@@ -554,9 +587,11 @@ elif page == "🧠 Deep Learning Forecast":
 
             epochs = st.slider("Training epochs", 5, 50, 15)
 
-        run = st.button("Train & Forecast")
+        selected_model_available = tf_available if model_choice == "LSTM" else prophet_available
 
-        if run:
+        run = st.button("Train & Forecast", disabled=not selected_model_available)
+
+        if run and selected_model_available:
 
             from src import deep_learning as dl
 

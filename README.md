@@ -1,3 +1,16 @@
+---
+title: Stock Market Analysis & Prediction
+emoji: 📈
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.58.0"
+app_file: streamlit_app.py
+pinned: false
+license: mit
+short_description: Technical analysis, ML/DL forecasting, sentiment, and buy/sell signals for stocks.
+---
+
 # Stock Market Analysis & Prediction System
 
 A CLI + Streamlit toolkit for downloading stock data, analyzing it, and
@@ -111,6 +124,111 @@ If no ML model has been trained yet, its weight is redistributed
 proportionally across the technical and sentiment signals so the score
 stays meaningful. This is a research/education tool, not financial
 advice - always do your own due diligence before trading.
+
+## Deploying (Making It Live)
+
+### Option A: Streamlit Community Cloud (free, easiest)
+
+1. Push this project to a **public** GitHub repo (private repos need a paid plan).
+2. Go to [share.streamlit.io](https://share.streamlit.io), sign in with GitHub.
+3. Click "New app" -> select your repo/branch -> set the main file to
+   `streamlit_app.py` -> Deploy.
+4. You get a public URL like `yourname-stockapp.streamlit.app`.
+
+**Resource limits matter here.** The free tier gives ~1GB RAM. `tensorflow-cpu`
+and `prophet` are heavy enough that Deep Learning Forecasting may fail on that
+tier. Two ways to handle it:
+
+- Deploy as-is with `requirements.txt` and accept that the Deep Learning page
+  may be flaky/unavailable there (the app is built to degrade gracefully -
+  it'll show a warning and disable that page's button rather than crash).
+- Deploy with `requirements-cloud.txt` instead (rename it to `requirements.txt`
+  in your deployed branch, or point Streamlit Cloud's advanced settings at
+  it) to skip `tensorflow-cpu`/`prophet` entirely and keep everything else
+  fully working: Technical Analysis, Portfolio Analysis, News Sentiment,
+  Comparison, classic ML Prediction, and Recommendation.
+
+A `.streamlit/config.toml` is already included so the deployed app keeps the
+same dark navy/emerald/coral theme.
+
+### Option B: More headroom - Hugging Face Spaces
+
+Hugging Face Spaces supports Streamlit directly, and its free CPU tier
+(2 vCPU / 16GB RAM) has far more headroom than Streamlit Community Cloud's
+~1GB, so it's the better free option if you want Deep Learning Forecasting
+(LSTM/Prophet) to actually work reliably.
+
+1. Create a free account at huggingface.co/join.
+2. Go to huggingface.co/new-space -> pick a name -> SDK = **Streamlit** ->
+   Hardware = **CPU basic (free)** -> Create Space.
+3. Clone the Space's repo and copy this project into it:
+   ```bash
+   git clone https://huggingface.co/spaces/<your-username>/<space-name>
+   cd <space-name>
+   # copy in main.py, streamlit_app.py, src/, requirements.txt, .streamlit/
+   ```
+4. Push:
+   ```bash
+   git add .
+   git commit -m "Deploy stock app"
+   git push
+   ```
+   Use a Hugging Face **access token** (huggingface.co/settings/tokens, write
+   scope) as the password when prompted, not your account password.
+5. Watch the **Logs** tab while it builds - Prophet's Stan compile step takes
+   a few minutes, that's normal. Once green, it's live at
+   `https://huggingface.co/spaces/<username>/<space-name>`.
+
+This `README.md` already has the YAML metadata block Hugging Face needs at
+the top (title, sdk, `app_file: streamlit_app.py`, etc.) so it should work
+as-is once pushed.
+
+### Option C: Full control - your own server/container
+
+For a VM (AWS/GCP/DigitalOcean/etc.) or Docker:
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py --server.port 80 --server.address 0.0.0.0
+```
+
+Put it behind a reverse proxy (nginx/Caddy) with HTTPS if it's public-facing.
+
+### Notes for any option
+
+- No API keys or secrets are required anywhere in this app (news sentiment
+  uses free RSS feeds, not a paid API), so there's nothing to configure in
+  `.streamlit/secrets.toml`.
+- `data/`, `models/`, `reports/`, and `graphs/` are regenerated on demand and
+  are gitignored - most free hosts have an ephemeral filesystem anyway, so
+  don't rely on them persisting between restarts. If you need persistence
+  (e.g. trained models surviving a redeploy), add external storage (S3, a
+  database, etc.) - that's not included here.
+
+### Option D: Render
+
+Unlike Hugging Face Spaces, Render deploys from a **GitHub repository** -
+there's no drag-and-drop file upload option. Its free web service tier is
+also only 512MB RAM, which is too tight for `tensorflow-cpu` + `prophet`,
+so this uses the lightweight `requirements-cloud.txt` (Deep Learning
+Forecast page won't be available on this deployment).
+
+1. Push this project to a GitHub repo (public or private).
+2. Go to render.com, sign in with GitHub.
+3. Click **New > Blueprint**, select your repo. Render will read the
+   included `render.yaml` and configure everything automatically (build
+   command, start command, free plan) - just click **Apply**.
+4. Wait for the build to finish, then open the URL Render gives you.
+
+If you don't want to use the Blueprint, you can instead do **New > Web
+Service**, pick the repo, and manually set:
+- Build Command: `pip install -r requirements-cloud.txt`
+- Start Command: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0`
+- Instance Type: Free
+
+Note: free web services on Render spin down after 15 minutes of
+inactivity, with a 30-60 second cold start on the next visit - same
+tradeoff as the other free options above.
 
 ## Developer
 
