@@ -13,6 +13,14 @@ short_description: Technical analysis, ML/DL forecasting, sentiment, and buy/sel
 
 # Stock Market Analysis & Prediction System
 
+**🔴 Live Demo:** [stock-market-analysis-prediction-1.onrender.com](https://stock-market-analysis-prediction-1.onrender.com)
+
+> Deployed on Render's free tier using `requirements-cloud.txt`, so the
+> Deep Learning Forecast page (LSTM/Prophet) isn't available on this
+> deployment - everything else is fully live. Free tier also spins down
+> after 15 minutes of inactivity, so the first load after a while may take
+> 30-60 seconds to wake up.
+
 A CLI + Streamlit toolkit for downloading stock data, analyzing it, and
 generating multi-factor buy/sell recommendations.
 
@@ -205,26 +213,29 @@ Put it behind a reverse proxy (nginx/Caddy) with HTTPS if it's public-facing.
   (e.g. trained models surviving a redeploy), add external storage (S3, a
   database, etc.) - that's not included here.
 
-### Option D: Render
+### Option D: Render (already deployed here)
+
+This project is live at
+[stock-market-analysis-prediction-1.onrender.com](https://stock-market-analysis-prediction-1.onrender.com).
 
 Unlike Hugging Face Spaces, Render deploys from a **GitHub repository** -
 there's no drag-and-drop file upload option. Its free web service tier is
 also only 512MB RAM, which is too tight for `tensorflow-cpu` + `prophet`,
-so this uses the lightweight `requirements-cloud.txt` (Deep Learning
-Forecast page won't be available on this deployment).
+so this deployment uses the lightweight `requirements-cloud.txt` (Deep
+Learning Forecast page isn't available there).
+
+To redeploy this yourself:
 
 1. Push this project to a GitHub repo (public or private).
 2. Go to render.com, sign in with GitHub.
-3. Click **New > Blueprint**, select your repo. Render will read the
-   included `render.yaml` and configure everything automatically (build
-   command, start command, free plan) - just click **Apply**.
+3. Click **New > Web Service**, pick the repo, and set:
+   - Build Command: `pip install -r requirements-cloud.txt`
+   - Start Command: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0`
+   - Instance Type: Free
 4. Wait for the build to finish, then open the URL Render gives you.
 
-If you don't want to use the Blueprint, you can instead do **New > Web
-Service**, pick the repo, and manually set:
-- Build Command: `pip install -r requirements-cloud.txt`
-- Start Command: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0`
-- Instance Type: Free
+(A `render.yaml` blueprint is also included if you'd rather use **New >
+Blueprint** instead of filling those fields in by hand.)
 
 Note: free web services on Render spin down after 15 minutes of
 inactivity, with a 30-60 second cold start on the next visit - same
